@@ -1,0 +1,37 @@
+create table student_final
+(
+roll_no int,
+name varchar(20),
+city varchar(20),
+age int
+);
+
+
+insert into student_final values(1,'Harsh','Delhi',18);
+insert into student_final values(2,'Pratik','Bihar',19);
+insert into student_final values(3,'Riyanka','Bihar',20);
+insert into student_final values(4,'Deep','Bihar',18);
+insert into student_final values(5,'Saptarhi','Bihar',19);
+insert into student_final values(6,'Dhanraj','Bihar',20);
+insert into student_final values(7,'Rohit','Bihar',18);
+insert into student_final values(8,'Niraj','Bihar',19);
+
+
+create table Studentcourse
+(
+course_id int,
+roll_no int,
+course varchar2(50)
+);
+
+
+
+
+1	1	Data Science
+2	2	Big Data
+2	3	SQL
+3	4	Web Development
+1	5	Full Stack
+4	9	Visualization
+5	10	Data Analytics
+4	11	Data Structures

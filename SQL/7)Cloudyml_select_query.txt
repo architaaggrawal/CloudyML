@@ -1,0 +1,16 @@
+Order	Clause	   Function
+1	FROM	         Tables are joined to get the base data.
+2	WHERE	         The base data is filtered.
+3	GROUP BY	   The filtered base data is grouped.
+4	HAVING	   The grouped base data is filtered.
+5	SELECT	   The final data is returned.
+6	ORDER BY	   The final data is sorted.
+7	LIMIT	         The returned data is limited to row count
+
+
+create table exams (student_id int, subject varchar(20), marks int);
+delete from exams;
+insert into exams values (1,'Chemistry',91),(1,'Physics',91)
+,(2,'Chemistry',80),(2,'Physics',90)
+,(3,'Chemistry',80)
+,(4,'Chemistry',71),(4,'Physics',54);

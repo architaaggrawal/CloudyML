@@ -1,0 +1,109 @@
+create table paintings
+(
+id int,
+name varchar,
+artist_id int,
+listed_price int
+);
+
+
+insert into paintings values (11,'Miracle',1,300);
+insert into paintings values (12,'Sunshine',1,700);
+insert into paintings values (13,'Woman',2,2800);
+insert into paintings values (14,'Man',2,2300);
+insert into paintings values (15,'Barbie',3,250);
+insert into paintings values (16,'Cool Painting',3,5000);
+insert into paintings values (17,'Black Square',3,50);
+insert into paintings values (18,'Mountains',4,1300);
+
+
+create table artists
+(
+id int,
+first_name varchar(100),
+last_name varchar(100),
+
+);
+
+insert into artists values(1,'Thomas','Black');
+insert into artists values(2,'Kate','Smith');
+insert into artists values(3,'Natali','Wein');
+insert into artists values(4,'Francesco','Benelli');
+
+
+create table collectors
+(
+id int,
+first_name varchar(100),
+last_name varchar(100),
+
+);
+
+insert into collecotrs values(101,'Brandon','Cooper');
+insert into collecotrs values(102,'Laura','Fisher');
+insert into collecotrs values(103,'Christina','Buffet');
+insert into collecotrs values(104,'Steve','Stevenson');
+
+create table sales_1 
+(
+id int,
+dt date,
+painting_id int,
+artist_id int,
+collector_id int,
+sale_price int
+);
+
+
+insert into sales_1 values(1001,'2021-11-01',13,2,104,2500);
+insert into sales_1 values(1002,'2021-11-10',14,2,102,2300);
+insert into sales_1 values(1003,'2021-11-10',11,1,102,300);
+insert into sales_1 values(1004,'2021-11-15',16,3,103,4000);
+insert into sales_1 values(1005,'2021-11-22',15,3,103,200);
+insert into sales_1 values(1006,'2021-11-22',17,3,103,50);
+
+------  list paintings that are priced higher than the average
+
+SELECT name, listed_price
+FROM paintings
+WHERE listed_price > (
+    SELECT AVG(listed_price)
+    FROM paintings
+);
+
+Our subquery is in the WHERE clause, where it filters the result set based on the listed price. This subquery returns a single value: the average price per painting for our gallery. Each listed price is compared to this value, and only the paintings that are priced above average make it to the final output:
+
+
+----- list all collectors who purchased paintings from our gallery.
+
+SELECT first_name, last_name
+FROM collectors
+WHERE id IN (
+    SELECT collector_id
+    FROM sales
+);
+
+-----total amount of sales for each artist who has sold at least one painting in our gallery.
+
+SELECT
+  artists.first_name,
+  artists.last_name,
+  artist_sales.sales
+FROM artists
+JOIN (
+    SELECT artist_id, SUM(sales_price) AS sales
+    FROM sales
+    GROUP BY artist_id
+  ) AS artist_sales
+  ON artists.id = artist_sales.artist_id;
+
+
+------   the first names and the last names of the artists who had zero sales with our gallery
+
+SELECT first_name, last_name
+FROM artists
+WHERE NOT EXISTS (
+  SELECT *
+  FROM sales
+  WHERE sales.artist_id = artists.id
+);

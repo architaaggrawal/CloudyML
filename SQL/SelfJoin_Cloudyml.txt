@@ -1,0 +1,20 @@
+create table emp_self
+(
+emp_id int,
+emp_name varchar(50),
+salary int,
+manager_id int
+);
+
+insert into emp_self values(1,'Warner',10000,4);
+insert into emp_self values(2,'Knight',15000,5);
+insert into emp_self values(3,'Gardner',10000,4);
+insert into emp_self  values(4,'Kapp',5000,2);
+insert into emp_self values(5,'Cummins',12000,6);
+insert into emp_self values(6,'Sutherland',12000,2);
+insert into emp_self values(7,'Lanning',9000,2);
+insert into emp_self values(8,'Capsey',5000,2);
+
+
+
+
